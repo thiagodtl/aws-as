@@ -7,8 +7,7 @@ Esta documentação descreve como criar uma VPC na AWS com duas sub-redes públi
 1. No Console da AWS, vá para **VPC** e clique em **Criar VPC**.
 2. Defina os seguintes parâmetros:
    - **Nome da VPC**: `vpc-wp`
-   - **Bloco CIDR IPv4**: `10.0.0.0/16` (exemplo)
-   - **Bloco CIDR IPv6**: Se necessário
+   - **Bloco CIDR IPv4**: `10.0.0.0/16`
    - **Tenancy**: **Default**
 3. Clique em **Criar VPC**.
 
@@ -20,7 +19,7 @@ Esta documentação descreve como criar uma VPC na AWS com duas sub-redes públi
 2. Para a primeira sub-rede pública:
    - **Nome da Sub-rede**: `wp-publica-01`
    - **VPC**: `vpc-wp`
-   - **Zona de Disponibilidade**: `us-east-1a` (ou a desejada)
+   - **Zona de Disponibilidade**: `us-east-1a` 
    - **Bloco CIDR**: `10.0.1.0/24`
 3. Clique em **Criar Sub-rede**.
 4. Repita o processo para criar a segunda sub-rede pública:
@@ -78,7 +77,3 @@ Esta documentação descreve como criar uma VPC na AWS com duas sub-redes públi
 1. Verifique se todas as sub-redes estão associadas às tabelas de rotas corretas.
 2. Confirme que o Internet Gateway está vinculado à VPC.
 3. Confirme que o NAT Gateway está associado à tabela de rotas privada.
-
-## Conclusão
-
-Agora você configurou uma VPC com duas sub-redes públicas, duas sub-redes privadas, e os respectivos gateways e tabelas de rotas, prontos para hospedar sua aplicação WordPress.
