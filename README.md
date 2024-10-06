@@ -80,3 +80,57 @@ Esta documentação descreve como criar uma VPC na AWS com duas sub-redes públi
 4. Ao final o diagrama da VPC deve ficar como a imagem abaixo:
    ![image](https://github.com/user-attachments/assets/88c85eac-afad-499f-80d3-79b64334ba33)
 
+   # CONFIGURANDO OS GRUPOS DE SEGURANÇA
+
+   # Configuração do Grupo de Segurança para Load Balancer
+
+Este documento descreve como configurar o grupo de segurança para um Load Balancer na AWS, baseado nas regras de entrada e saída apresentadas.
+
+## 1. Criando o Grupo de Segurança
+
+1. No Console da AWS, vá para **EC2** e depois para **Grupos de Segurança**.
+2. Clique em **Criar grupo de segurança**.
+3. Preencha os seguintes campos:
+   - **Nome do Grupo de Segurança**: `load-balancer-sg`
+   - **Descrição**: `Grupo de segurança para o Load Balancer`
+   - **VPC**: Selecione a VPC associada (`vpc-wp` ou equivalente).
+
+4. Clique em **Criar Grupo de Segurança**.
+
+## 2. Configurando Regras de Entrada (Inbound Rules)
+
+1. Após criar o grupo de segurança, vá para a aba de **Regras de Entrada** e clique em **Editar regras de entrada**.
+2. Adicione a seguinte regra:
+
+| Tipo   | Protocolo | Intervalo de Portas | Origem     | Descrição |
+|--------|-----------|---------------------|------------|-----------|
+| HTTP   | TCP       | 80                  | 0.0.0.0/0  | -         |
+
+3. Esta regra permite o tráfego HTTP (porta 80) de qualquer origem (0.0.0.0/0), permitindo que o Load Balancer aceite conexões públicas.
+
+4. Clique em **Salvar Regras**.
+
+## 3. Configurando Regras de Saída (Outbound Rules)
+
+1. Vá para a aba **Regras de Saída** e clique em **Editar regras de saída**.
+2. Adicione a seguinte regra:
+
+| Tipo             | Protocolo | Intervalo de Portas | Destino    | Descrição |
+|------------------|-----------|---------------------|------------|-----------|
+| Todo o tráfego   | Tudo      | Tudo                | 0.0.0.0/0  | -         |
+
+3. Essa regra permite que o Load Balancer envie tráfego para qualquer destino, o que é importante para responder às solicitações recebidas.
+
+4. Clique em **Salvar Regras**.
+
+## 4. Associação ao Load Balancer
+
+1. Navegue até o seu **Load Balancer** na seção **EC2 > Load Balancers**.
+2. Edite as configurações de segurança do Load Balancer para associar o grupo de segurança recém-criado (`load-balancer-sg`).
+
+## Conclusão
+
+Com essas configurações, o grupo de segurança do Load Balancer estará configurado para permitir tráfego HTTP (porta 80) de qualquer origem e enviar tráfego de saída para qualquer destino, garantindo que o Load Balancer funcione corretamente para aplicações públicas.
+
+
+
