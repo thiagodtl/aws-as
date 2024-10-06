@@ -77,3 +77,6 @@ Esta documentação descreve como criar uma VPC na AWS com duas sub-redes públi
 1. Verifique se todas as sub-redes estão associadas às tabelas de rotas corretas.
 2. Confirme que o Internet Gateway está vinculado à VPC.
 3. Confirme que o NAT Gateway está associado à tabela de rotas privada.
+4. Ao final o diagrama da VPC deve ficar como a imagem abaixo:
+   ![image](https://github.com/user-attachments/assets/88c85eac-afad-499f-80d3-79b64334ba33)
+
