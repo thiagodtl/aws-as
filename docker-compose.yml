@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: wp_container
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: Escolha o host do DNS do Banco de Dados
+      WORDPRESS_DB_USER: Coloque o usuário do Banco de Dados
+      WORDPRESS_DB_PASSWORD: Sua Senha
+      WORDPRESS_DB_NAME: Nome do Banco de Dados
+    volumes:
+      - wordpress_data:/var/www/html
+
+volumes:
+  wordpress_data:
