@@ -486,6 +486,43 @@ Aqui descreve os passos para criar um grupo de Auto Scaling na AWS, configurado 
 - **Segurança:** As regras de segurança devem ser revisadas regularmente para garantir que apenas o tráfego necessário seja permitido.
 - **Roteamento:** A configuração da tabela de rotas do IGW é essencial para permitir que o Load Balancer roteie o tráfego corretamente entre as sub-redes e a internet.
 
+# Criação do Grupo de Segurança do Endpoint
+
+Este documento descreve os passos necessários para criar e configurar um grupo de segurança para um endpoint na AWS, especificamente para permitir conexões SSH, conforme mostrado na imagem fornecida.
+
+## Passo 1: Criação do Grupo de Segurança
+
+1. Acesse o console da AWS e vá para **VPC** > **Grupos de Segurança**.
+2. Clique em **Criar grupo de segurança**.
+3. Preencha os detalhes do grupo de segurança conforme abaixo:
+   - **Nome do grupo de segurança:** `endpoint-sg`
+   - **Descrição:** `Entrada SSH`
+   - **VPC:** Escolha a VPC criada
+
+4. Clique em **Criar grupo de segurança** para finalizar a criação.
+
+## Passo 2: Configuração das Regras de Entrada
+
+### 2.1 Configuração das Regras de Entrada
+
+- Não precisa mexer em nada
+
+## Passo 3: Configuração das Regras de Saída
+
+### 3.1 Configuração das Regras de Saída
+
+Por padrão, o grupo de segurança permite todo o tráfego de saída, mas neste caso, está configurado com uma regra específica para o tráfego SSH:
+
+- **Tipo:** SSH
+- **Protocolo:** TCP
+- **Porta:** 22
+- **Destino:** Escolha o grupo de segurança associado às instâncias EC2
+
+## Observações
+
+- **Segurança:** Recomenda-se restringir as regras de entrada do grupo de segurança a endereços IP específicos para evitar acessos não autorizados.
+- **Controle de Tráfego:** As regras de saída são configuradas para permitir que o tráfego SSH atinja as instâncias EC2 associadas ao grupo de segurança especificado, garantindo conectividade segura.
+
 #  Criação de um EC2 Instance Connect Endpoint
 
 Aqui descreve os passos necessários para criar e configurar um EC2 Instance Connect Endpoint na AWS, permitindo acesso seguro a instâncias EC2.
@@ -521,8 +558,60 @@ Aqui descreve os passos necessários para criar e configurar um EC2 Instance Con
 - **Segurança:** A configuração de acesso SSH deve ser restrita ao mínimo necessário, permitindo apenas endereços IP confiáveis para evitar tentativas de acesso não autorizado.
 - **Disponibilidade:** Garantir que o endpoint esteja configurado em uma sub-rede que possua conectividade adequada para acessar suas instâncias EC2.
 
+# Acessar a Instância EC2 Usando o Endpoint
 
+Aqui descreve como acessar uma instância EC2 utilizando o EC2 Instance Connect Endpoint, conforme as configurações apresentadas na imagem.
 
+## Passo 1: Acessar a Instância
+
+1. Acesse o console da AWS e vá para **EC2** > **Instâncias**.
+2. Selecione a instância que deseja acessar
+3. Clique em **Conectar**.
+
+## Passo 2: Escolher o Método de Conexão
+
+Na janela de conexão, configure as opções conforme descrito abaixo:
+
+- **Tipo de conexão:** 
+  - Selecione a opção **Conectar-se usando o endpoint do EC2 Instance Connect**.
+  - Essa opção permite que você use um cliente baseado em navegador para se conectar à instância através de um endpoint privado da VPC.
+
+## Passo 3: Configurações de Conexão
+
+1. **Endpoint do EC2 Instance Connect:**
+   - Selecione o endpoint `eice-0b5a07bcb6e4854ed`.
+2. **Endereço IP privado:** 
+   - Use o endereço IP `10.0.2.80` para se conectar à instância.
+3. **Nome de usuário:** 
+   - Insira `ec2-user` como o nome de usuário padrão, a menos que você tenha configurado um nome de usuário personalizado.
+4. **Duração máxima do túnel:** 
+   - Defina o tempo máximo para 3600 segundos (1 hora), que é o tempo máximo permitido para a sessão SSH.
+
+## Passo 4: Iniciar a Conexão
+
+- Após configurar todas as opções, clique no botão **Conectar** para iniciar a conexão com a instância EC2 utilizando o EC2 Instance Connect através do endpoint.
+
+## Observações
+
+- **Acesso Seguro:** O uso do EC2 Instance Connect Endpoint permite que você se conecte à instância de forma segura, sem a necessidade de um endereço IP público.
+- **Tempo de Conexão:** A duração máxima de 3600 segundos garante que a sessão SSH seja temporária e se desconecte automaticamente após 1 hora, conforme necessário.
+- **Usuário Padrão:** Na maioria das configurações, o usuário `ec2-user` é usado para iniciar a instância, mas você deve verificar as instruções específicas da AMI para confirmar se esse é o usuário correto.
+
+Conforme imagem abaixo:
+![image](https://github.com/user-attachments/assets/9ca5519f-ed7e-411c-9566-aacbdc77d75b)
+
+# Editando o docker-compose.yml
+- Use o arquivo `docker-compose.yml` disponibilizado neste repositório e edite-o conforme sua configuração do RDS.
+- Após dê o comando `docker-compose up -d` assim o docker irá rodar de forma "detachada".
+
+# Acessando o WordPress pelo navegador
+
+- Acesse o seu Load Balancer. Vá em VPC, em Balanceamnto de Carga escolha o Load Balancer.
+- Clique no Load Balancer criado e copie o endereço do DNS.
+- Acesse pelo navegador com o endereço do DNS e voilà, você está acessando o WordPress. :)
+
+  ## Agradecimento especial a Edilson Maria (https://github.com/EdilsonMaria/) e André Luiz (https://github.com/nullbyte-s) que me ajudaram em alguns detalhes que estavam dando erro.
+  
 
 
 
