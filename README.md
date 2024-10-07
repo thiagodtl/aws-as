@@ -598,6 +598,7 @@ Na janela de conexão, configure as opções conforme descrito abaixo:
 - **Usuário Padrão:** Na maioria das configurações, o usuário `ec2-user` é usado para iniciar a instância, mas você deve verificar as instruções específicas da AMI para confirmar se esse é o usuário correto.
 
 Conforme imagem abaixo:
+
 ![image](https://github.com/user-attachments/assets/9ca5519f-ed7e-411c-9566-aacbdc77d75b)
 
 # Editando o docker-compose.yml
