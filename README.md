@@ -488,7 +488,7 @@ Aqui descreve os passos para criar um grupo de Auto Scaling na AWS, configurado 
 
 # Criação do Grupo de Segurança do Endpoint
 
-Este documento descreve os passos necessários para criar e configurar um grupo de segurança para um endpoint na AWS, especificamente para permitir conexões SSH, conforme mostrado na imagem fornecida.
+Aqui descreve os passos necessários para criar e configurar um grupo de segurança para um endpoint na AWS, especificamente para permitir conexões SSH, conforme mostrado na imagem fornecida.
 
 ## Passo 1: Criação do Grupo de Segurança
 
@@ -610,7 +610,8 @@ Conforme imagem abaixo:
 - Clique no Load Balancer criado e copie o endereço do DNS.
 - Acesse pelo navegador com o endereço do DNS e voilà, você está acessando o WordPress. :)
 
-  ## Agradecimento especial a Edilson Maria (https://github.com/EdilsonMaria/) e André Luiz (https://github.com/nullbyte-s) que me ajudaram em alguns detalhes que estavam dando erro.
+ 
+ Agradecimento especial a Edilson Maria (https://github.com/EdilsonMaria/) e André Luiz (https://github.com/nullbyte-s) que me ajudaram em alguns detalhes que estavam dando erro.
   
 
 
